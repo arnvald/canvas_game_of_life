@@ -23,19 +23,20 @@ describe('Board', function () {
 
   describe('cells', function(){
     it('should have 30 cells', function () {
-      expect(board.cells.length).toEqual(30);
+      expect(board.cells().length).toEqual(30);
     });
   });
 
-  describe('getCell', function() {
+  describe('cell', function() {
     it('should return proper cell', function() {
-      expect(board.cells[0] === board.getCell(0,0)).toBeTruthy();
-      expect(board.cells[5] === board.getCell(0,5)).toBeTruthy();
-      expect(board.cells[6] === board.getCell(1,0)).toBeTruthy();
-      expect(board.cells[7] === board.getCell(1,1)).toBeTruthy();
-      expect(board.cells[29] === board.getCell(4,5)).toBeTruthy();
-      expect(board.cells[9] === board.getCell(1,3)).toBeTruthy();
-      expect(board.cells[9] === board.getCell(1,4)).not.toBeTruthy();
+      var cells = board.cells();
+      expect(cells[0] === board.cell(0,0)).toBeTruthy();
+      expect(cells[5] === board.cell(0,5)).toBeTruthy();
+      expect(cells[6] === board.cell(1,0)).toBeTruthy();
+      expect(cells[7] === board.cell(1,1)).toBeTruthy();
+      expect(cells[29] === board.cell(4,5)).toBeTruthy();
+      expect(cells[9] === board.cell(1,3)).toBeTruthy();
+      expect(cells[9] === board.cell(1,4)).not.toBeTruthy();
     });
   });
 
@@ -52,21 +53,21 @@ describe('Board', function () {
   describe('neighbours', function() {
     it('should return proper value', function() {
       expect(board.neighbours(7)).toEqual(0);
-      spyOn(board.getCell(0,0), 'isAlive').andReturn(true);
+      spyOn(board.cell(0,0), 'isAlive').andReturn(true);
       expect(board.neighbours(7)).toEqual(1);
-      spyOn(board.getCell(0,1), 'isAlive').andReturn(true);
+      spyOn(board.cell(0,1), 'isAlive').andReturn(true);
       expect(board.neighbours(7)).toEqual(2);
-      spyOn(board.getCell(0,2), 'isAlive').andReturn(true);
+      spyOn(board.cell(0,2), 'isAlive').andReturn(true);
       expect(board.neighbours(7)).toEqual(3);
-      spyOn(board.getCell(1,0), 'isAlive').andReturn(true);
+      spyOn(board.cell(1,0), 'isAlive').andReturn(true);
       expect(board.neighbours(7)).toEqual(4);
-      spyOn(board.getCell(1,2), 'isAlive').andReturn(true);
+      spyOn(board.cell(1,2), 'isAlive').andReturn(true);
       expect(board.neighbours(7)).toEqual(5);
-      spyOn(board.getCell(2,0), 'isAlive').andReturn(true);
+      spyOn(board.cell(2,0), 'isAlive').andReturn(true);
       expect(board.neighbours(7)).toEqual(6);
-      spyOn(board.getCell(2,1), 'isAlive').andReturn(true);
+      spyOn(board.cell(2,1), 'isAlive').andReturn(true);
       expect(board.neighbours(7)).toEqual(7);
-      spyOn(board.getCell(2,2), 'isAlive').andReturn(true);
+      spyOn(board.cell(2,2), 'isAlive').andReturn(true);
       expect(board.neighbours(7)).toEqual(8);
     });
   });
@@ -78,8 +79,8 @@ describe('Board', function () {
       expect(newBoard.cols()).toEqual(board.cols());
       expect(newBoard.keepAliveRules()).toEqual(board.keepAliveRules());
       expect(newBoard.makeAliveRules()).toEqual(board.makeAliveRules());
-      expect(newBoard.cells).toEqual(board.cells);
-      expect(newBoard.cells == board.cells).toBeFalsy();
+      expect(newBoard.cells()).toEqual(board.cells());
+      expect(newBoard.cells() == board.cells()).toBeFalsy();
     });
   });
 

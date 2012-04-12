@@ -9,8 +9,9 @@ function Board(_rows, _cols, _keepAliveRules, _makeAliveRules) {
   var cols = _cols;
   var keepAliveRules = _keepAliveRules;
   var makeAliveRules = _makeAliveRules;
+  var cells = createCells();
 
-  this.cells = createCells();
+  this.setCells = function(_cells) { cells = _cells;};
 
   function createCells() {
     cells = [];
@@ -24,10 +25,11 @@ function Board(_rows, _cols, _keepAliveRules, _makeAliveRules) {
   this.cols = function() { return cols; };
   this.makeAliveRules = function() { return makeAliveRules; };
   this.keepAliveRules = function() { return keepAliveRules; };
+  this.cells = function() { return cells; };
 
-  this.getCell = function(row, col) {
+  this.cell = function(row, col) {
     if(row < 0 || row >= rows || col < 0 || col >= cols) { return null; }
-    return this.cells[(row*cols)+col];
+    return cells[(row*cols)+col];
   };
 
   this.nextTurn = function() {
@@ -52,20 +54,20 @@ function Board(_rows, _cols, _keepAliveRules, _makeAliveRules) {
     var neighbours = 0;
     var row = Math.floor(cellId / cols);
     var col = cellId % cols;
-    if (this.getCell(row-1, col-1) && this.getCell(row-1,col-1).isAlive()) { neighbours += 1;}
-    if (this.getCell(row-1, col) && this.getCell(row-1,col).isAlive()) { neighbours += 1;}
-    if (this.getCell(row-1, col+1) && this.getCell(row-1,col+1).isAlive()) { neighbours += 1;}
-    if (this.getCell(row, col-1) && this.getCell(row,col-1).isAlive()) { neighbours += 1;}
-    if (this.getCell(row, col+1) && this.getCell(row,col+1).isAlive()) { neighbours += 1;}
-    if (this.getCell(row+1, col-1) && this.getCell(row+1,col-1).isAlive()) { neighbours += 1;}
-    if (this.getCell(row+1, col) && this.getCell(row+1,col).isAlive()) { neighbours += 1;}
-    if (this.getCell(row+1, col+1) && this.getCell(row+1,col+1).isAlive()) { neighbours += 1;}
+    if (this.cell(row-1, col-1) && this.cell(row-1,col-1).isAlive()) { neighbours += 1;}
+    if (this.cell(row-1, col) && this.cell(row-1,col).isAlive()) { neighbours += 1;}
+    if (this.cell(row-1, col+1) && this.cell(row-1,col+1).isAlive()) { neighbours += 1;}
+    if (this.cell(row, col-1) && this.cell(row,col-1).isAlive()) { neighbours += 1;}
+    if (this.cell(row, col+1) && this.cell(row,col+1).isAlive()) { neighbours += 1;}
+    if (this.cell(row+1, col-1) && this.cell(row+1,col-1).isAlive()) { neighbours += 1;}
+    if (this.cell(row+1, col) && this.cell(row+1,col).isAlive()) { neighbours += 1;}
+    if (this.cell(row+1, col+1) && this.cell(row+1,col+1).isAlive()) { neighbours += 1;}
     return neighbours;
   };
 
   this.clone = function() {
     newBoard = new Board(rows, cols, keepAliveRules, makeAliveRules);
-    newBoard.cells = this.cells.slice();
+    newBoard.setCells(this.cells().slice());
     return newBoard;
   };
 }

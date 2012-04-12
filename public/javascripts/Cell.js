@@ -1,20 +1,14 @@
 function Cell() {
-  var state = "empty";
+  var isAlive = false;
 
-  this.state = function() {
-    return state;
+  this.makeAlive = function() { isAlive = true; };
+  this.makeDead = function() { isAlive = false; };
+
+  this.switchState = function() {
+    if(isAlive === true) { this.makeDead(); }
+    else { this.makeAlive();}
   };
 
-  this.makeAlive = function() { state = "alive"; };
-  this.makeDead = function() { state = "dead"; };
-  this.makeEmpty = function() { state = "empty"; };
-
-  this.aliveOrDelete = function() {
-    if(state == "alive") { state = "dead"; }
-    else { state = "alive";}
-  };
-
-  this.isAlive = function() { return (state == "alive");};
-  this.isEmpty = function() { return (state == "empty");};
-  this.isDead = function() { return (state == "dead");};
+  this.isAlive = function() { return isAlive;};
+  this.isDead = function() { return !isAlive;};
 }
