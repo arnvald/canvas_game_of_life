@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Game of Life</title>
+    <script type="text/javascript" src="javascripts/zepto.js"></script>
+    <script type="text/javascript" src="javascripts/Cell.js"></script>
+    <script type="text/javascript" src="javascripts/Board.js"></script>
+    <script type="text/javascript" src="javascripts/GameOfLife.js"></script>
+    <script type="text/javascript" src="javascripts/CanvasGameOfLife.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+  </head>
+  <body>
+    <div id="container">
+      <h1>Game of Life</h1>
+      <div id="canvas">
+        <canvas id="game_canvas" width="940" height="440"></canvas>
+      </div>
+      <div id="settings">
+        <form id="settings_form" action="#">
+          <fieldset>
+            <div class="left">
+              <h3>Rules</h3>
+              <div class="input">
+                <label for="keep_alive_rules">Keep alive:</label>
+                <input type="text" id="keep_alive_rules" value="2,3">
+              </div>
+              <div class="input">
+                <label for="make_alive_rules">Make alive:</label>
+                <input type="text" id="make_alive_rules" value="3">
+              </div>
+            </div>
+            <div class="left">
+              <h3>Steps</h3>
+              <div class="input">
+                <label for="step">Step:</label>
+                <input type="text" id="step" value="1">
+              </div>
+              <div class="input">
+                <label for="speed">Speed:</label>
+                <input type="text" id="speed" value="1">
+              </div>
+            </div>
+            <div class="left">
+              <div>
+                <button type="submit" id="clear" class="run">Clear</button>
+                <button type="submit" id="one_step" class="run">One step</button>
+              </div>
+            </div>
+            <div class="left">
+              <div> 
+                <button type="submit" id="run" class="run">Run</button>
+                <button type="submit" id="stop" class="run hidden">Stop</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
