@@ -42,10 +42,8 @@ describe('Board', function () {
 
   describe('nextTurn', function() {
     it('should run loop 30 times', function() {
-      var neighbourSpy = spyOn(board, 'neighbours');
       var nextStateSpy = spyOn(board, 'nextState');
       board.nextTurn();
-      expect(neighbourSpy.callCount).toEqual(30);
       expect(nextStateSpy.callCount).toEqual(30);
     });
   });
@@ -79,8 +77,9 @@ describe('Board', function () {
       expect(newBoard.cols()).toEqual(board.cols());
       expect(newBoard.keepAliveRules()).toEqual(board.keepAliveRules());
       expect(newBoard.makeAliveRules()).toEqual(board.makeAliveRules());
-      expect(newBoard.cells()).toEqual(board.cells());
-      expect(newBoard.cells() == board.cells()).toBeFalsy();
+      for(i=0;i<newBoard.cells().length;i++) {
+        expect(newBoard.cells()[i].isAlive()).toEqual(board.cells()[i].isAlive());
+      }
     });
   });
 

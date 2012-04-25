@@ -11,4 +11,10 @@ function Cell() {
 
   this.isAlive = function() { return isAlive;};
   this.isDead = function() { return !isAlive;};
+
+  this.clone = function() {
+    var clone = new Cell();
+    if(this.isAlive()) { clone.makeAlive(); }
+    return clone;
+ };
 }

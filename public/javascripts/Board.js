@@ -35,7 +35,7 @@ function Board(_rows, _cols, _keepAliveRules, _makeAliveRules) {
   this.nextTurn = function() {
     var oldBoard = this.clone();
     for(i = 0; i < rows*cols; i++) {
-      neighbours = this.neighbours(i);
+      neighbours = oldBoard.neighbours(i);
       this.nextState(i, neighbours);
     }
   };
@@ -66,8 +66,12 @@ function Board(_rows, _cols, _keepAliveRules, _makeAliveRules) {
   };
 
   this.clone = function() {
-    newBoard = new Board(rows, cols, keepAliveRules, makeAliveRules);
-    newBoard.setCells(this.cells().slice());
+    var newBoard = new Board(rows, cols, keepAliveRules, makeAliveRules);
+    var newCells = [];
+    for(var i=0;i<cells.length;i++) {
+      newCells.push(cells[i].clone());
+    }
+    newBoard.setCells(newCells);
     return newBoard;
   };
 }
